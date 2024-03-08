@@ -10,6 +10,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     strategy:
       matrix:
         dockerfiles: ["entrypoint", "static"]
@@ -37,7 +39,7 @@ jobs:
         images: |
           ghcr.io/bdalpe/nginx-connect-proxy
         flavor: |
-          suffix=${{ matrix.dockerfiles }},onlatest=true
+          suffix=-${{ matrix.dockerfiles }},onlatest=true
 
     - name: Build and push
       id: docker_build
